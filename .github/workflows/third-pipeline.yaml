@@ -6,9 +6,8 @@ on:
       depthLevel:
         description: 'Depth Level'     
         required: true
-        default: '0'
 jobs:
-  print dir content:
+  print_dir_content:
     runs-on: ubuntu-latest
 
     steps:

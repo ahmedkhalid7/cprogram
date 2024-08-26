@@ -1,4 +1,4 @@
-name: Secrets and Environment Variables
+name: Secrets and Environment Variable
 
 on:
   workflow_dispatch

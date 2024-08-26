@@ -1,0 +1,32 @@
+name: Caching Dependencies Demo
+on:
+push:
+   branches:
+     - main
+pull_request:
+   branches:
+     - main
+jobs:
+python-job:
+   runs-on: ubuntu-latest
+   steps:
+     - name: Checkout code
+       uses: actions/checkout@v3
+     - name: Set up Python
+       uses: actions/setup-python@v4
+       with:
+         python-version: 3.9
+     # - name: Cache Python dependencies
+     #   uses: actions/cache@v3
+     #   id: pip-cache
+     #   with:
+     #     path: ~/.cache/pip
+     #     key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+     #     # restore-keys: |
+     #     #   ${{ runner.os }}-pip-
+     - name: Install dependencies
+       run: pip install -r requirements.txt
+       # Use the cache hit/miss to optimize the install step
+       # if: steps.pip-cache.outputs.cache-hit != 'true'
+     # - name: Run Python tests
+       # run: pytest

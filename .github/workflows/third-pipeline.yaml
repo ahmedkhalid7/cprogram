@@ -8,7 +8,7 @@ on:
         required: true
         default: '0'
 jobs:
-  run_python_script:
+  print dir content:
     runs-on: ubuntu-latest
 
     steps:

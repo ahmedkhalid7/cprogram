@@ -1,39 +1,34 @@
-name: Matrix Build Demo
+name: Matrix Build Demo
 
 on:
-push:
-   branches:
-     - main
-pull_request:
-   branches:
-     - main
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-build:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: [14, 16]
+        
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-   strategy:
-     matrix:
-       os: [ubuntu-latest, windows-latest, macos-latest]
-       node: [14, 16]
-       # include:
-       #   - os: ubuntu-latest
-       #     node: 18
-       # exclude:
-       #   - os: windows-latest
-       #     node: 14
+      - name: Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
 
-   runs-on: ${{ matrix.os }}
-   steps:
-     - name: Checkout code
-       uses: actions/checkout@v3
+      # Uncomment the following steps if needed
+      # - name: Install dependencies
+      #   run: npm install
 
-     - name: Setup Node.js ${{ matrix.node }}
-       uses: actions/setup-node@v3
-       with:
-         node-version: ${{ matrix.node }}
-
-     # - name: Install dependencies
-     #   run: npm install
-
-     # - name: Run tests
-     #   run: npm test
+      # - name: Run tests
+      #   run: npm test

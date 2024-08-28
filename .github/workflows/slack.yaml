@@ -30,7 +30,7 @@ jobs:
     if: always()
     steps:
     - name: Send pipeline status to Slack
-      uses: slackapi/slack-github-action@v3
+      uses: 8398a7/action-slack@v3
       with:
         slack-message: |
           Pipeline Status: ${{ job.status }}

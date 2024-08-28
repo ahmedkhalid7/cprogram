@@ -1,0 +1,13 @@
+name: LS Command
+
+on:
+  schedule:
+    - cron: '*/1 * * * *'
+
+jobs:
+  ls-command:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Execute ls command
+      run: ls -la

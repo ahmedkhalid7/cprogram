@@ -1,0 +1,33 @@
+name: Using GitHub Artifacts
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  NAME: Ahmed Khalid
+
+jobs:
+  job_1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo name into a file
+        run: echo "$NAME" > file_name.txt
+
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v4
+        with:
+          name: file_name2
+          path: file_name.txt
+
+  job_2:
+    needs: job_1
+    runs-on: windows-latest
+    steps:
+      - name: Download result for job 1
+        uses: actions/download-artifact@v4
+        with:
+          name: file_name2
+      - name: Display file contents
+        run: type file_name.txt
